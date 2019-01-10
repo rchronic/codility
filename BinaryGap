@@ -1,0 +1,27 @@
+# you can write to stdout for debugging purposes, e.g.
+# print("this is a debug message")
+
+def solution(N):
+    firstIndex = 0
+    for i in range(32):
+        if getNthBit(N,i) == 1:
+            firstIndex = i
+            break
+    
+    currentGap = 0
+    biggestGap = 0
+    
+    for i in range(32):
+        if getNthBit(N,firstIndex) == 0:
+            currentGap+=1
+        else:
+            if currentGap > biggestGap:
+                biggestGap = currentGap
+            currentGap = 0
+        firstIndex+=1
+    return biggestGap
+    
+def getNthBit(theNumber,bitPosition):
+    mask = 1
+    theNumberShifted = theNumber >> bitPosition
+    return theNumberShifted & mask
